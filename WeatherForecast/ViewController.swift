@@ -33,7 +33,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if  cityTextField.text != ""  {
             // https://www.weather-forecast.com/locations/London/forecasts/latest
             www = "https://www.weather-forecast.com/locations/"
-            www += cityTextField.text ?? "London"
+            www += cityTextField.text?.replacingOccurrences(of: " ", with: "-") ?? "London"   // save two worded inputs
             www += "/forecasts/latest"
             
             // continue
@@ -41,6 +41,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 let urlRequest = URLRequest(url: url )
                 
                 let task = URLSession.shared.dataTask(with: urlRequest as URLRequest) { data, response, error in
+                    var text = ""
+                    
                     if error != nil {  // might be error
                         self.label.text = error! as? String
                     } else {
@@ -49,28 +51,28 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             let separator = "(1&ndash;3 days)</span><p class=\"b-forecast__table-description-content\"><span class=\"phrase\">"
                             if let dataArray = dataString?.components(separatedBy: separator){
                                 if dataArray.count>1 { // text beginning is found successfully
-                                    let text = dataArray[1].components(separatedBy: "</span>")[0]
-                                                                       
-                                    DispatchQueue.main.sync(execute: {
-                                        // Update UI
-                                        self.label.text = text.replacingOccurrences(of: "&deg;", with: "º")
-                                    })
+                                    let rawText = dataArray[1].components(separatedBy: "</span>")[0]
+                                    text = rawText.replacingOccurrences(of: "&deg;", with: "º")
                                 }
                             }
                         }
                     }
+                    if text == "" {
+                        self.label.text = "Data process problem. Try again later."
+                    } else {
+                        DispatchQueue.main.sync(execute: {
+                            // Update UI
+                            self.label.text = text
+                        })
+                    }
                 }
-                
                 task.resume()
-                
-                
             } else {
-                label.text = "Invalid URL, improper symbols used in city name"
+                label.text = "Invalid URL "
             }
         } else {
             label.text = "Provide your city name"
         }
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
