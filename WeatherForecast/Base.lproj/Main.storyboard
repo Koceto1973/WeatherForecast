@@ -38,6 +38,12 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="weather info" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CYk-0j-So4">
+                                <rect key="frame" x="132" y="292" width="111" height="27.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="London, San Francisco, etc." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dqk-Oq-tzl">
                                 <rect key="frame" x="20" y="180" width="335" height="32"/>
                                 <color key="backgroundColor" red="0.90287510115188785" green="0.99645066624365486" blue="0.96018896928713604" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -54,18 +60,17 @@
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="SubmitCity:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5NQ-Iq-7Yw"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CYk-0j-So4">
-                                <rect key="frame" x="20" y="292" width="335" height="157"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Ip5-TK-FvC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="0th-3h-tSe"/>
                             <constraint firstItem="Dqk-Oq-tzl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="3ku-JE-eW2"/>
+                            <constraint firstItem="CYk-0j-So4" firstAttribute="top" secondItem="Lex-2H-4QS" secondAttribute="bottom" constant="20" id="58m-SK-jcd"/>
+                            <constraint firstItem="CYk-0j-So4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7C0-on-ctL"/>
                             <constraint firstItem="d4c-bM-VHZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="B4x-jF-hbw"/>
                             <constraint firstItem="Ip5-TK-FvC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="DFj-qX-zuY"/>
                             <constraint firstItem="Ip5-TK-FvC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="EOA-xv-af8"/>
@@ -73,11 +78,8 @@
                             <constraint firstItem="d4c-bM-VHZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="Tm0-bW-0Mn"/>
                             <constraint firstItem="Lex-2H-4QS" firstAttribute="top" secondItem="Dqk-Oq-tzl" secondAttribute="bottom" constant="20" id="Vji-EY-FDe"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Dqk-Oq-tzl" secondAttribute="trailing" constant="20" id="YPq-c2-Sjc"/>
-                            <constraint firstItem="CYk-0j-So4" firstAttribute="top" secondItem="Lex-2H-4QS" secondAttribute="bottom" constant="20" id="bUd-gS-Dhb"/>
                             <constraint firstItem="Ip5-TK-FvC" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="f9E-5u-UJW"/>
-                            <constraint firstItem="CYk-0j-So4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="fdL-Tc-iRB"/>
                             <constraint firstItem="Dqk-Oq-tzl" firstAttribute="top" secondItem="WHj-Um-o2e" secondAttribute="bottom" constant="20" id="fvT-82-pGm"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CYk-0j-So4" secondAttribute="trailing" constant="20" id="tEF-h1-n8W"/>
                             <constraint firstItem="WHj-Um-o2e" firstAttribute="top" secondItem="d4c-bM-VHZ" secondAttribute="bottom" constant="20" id="v6L-k5-cEa"/>
                             <constraint firstItem="Lex-2H-4QS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="we2-Fu-E0H"/>
                         </constraints>
@@ -85,6 +87,8 @@
                     </view>
                     <connections>
                         <outlet property="button" destination="Lex-2H-4QS" id="ib5-So-rDu"/>
+                        <outlet property="cityTextField" destination="Dqk-Oq-tzl" id="kL2-ag-8SN"/>
+                        <outlet property="label" destination="CYk-0j-So4" id="74v-a1-OXv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
