@@ -31,14 +31,42 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func SubmitCity(_ sender: UIButton) {
         if  cityTextField.text != ""  {
+            // https://www.weather-forecast.com/locations/London/forecasts/latest
             www = "https://www.weather-forecast.com/locations/"
             www += cityTextField.text ?? "London"
             www += "/forecasts/latest"
-            label.text = www
             
             // continue
-            
-            
+            if let url = URL(string: www) {
+                let urlRequest = URLRequest(url: url )
+                
+                let task = URLSession.shared.dataTask(with: urlRequest as URLRequest) { data, response, error in
+                    if error != nil {  // might be error
+                        self.label.text = error! as? String
+                    } else {
+                        if let unwrappedData = data {  // might be no data          // use format to get the data
+                            let dataString = NSString(data: unwrappedData, encoding: String.Encoding.utf8.rawValue)
+                            let separator = "(1&ndash;3 days)</span><p class=\"b-forecast__table-description-content\"><span class=\"phrase\">"
+                            if let dataArray = dataString?.components(separatedBy: separator){
+                                if dataArray.count>1 { // text beginning is found successfully
+                                    let text = dataArray[1].components(separatedBy: "</span>")[0]
+                                                                       
+                                    DispatchQueue.main.sync(execute: {
+                                        // Update UI
+                                        self.label.text = text.replacingOccurrences(of: "&deg;", with: "º")
+                                    })
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                task.resume()
+                
+                
+            } else {
+                label.text = "Invalid URL, improper symbols used in city name"
+            }
         } else {
             label.text = "Provide your city name"
         }

@@ -39,7 +39,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="weather info" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CYk-0j-So4">
-                                <rect key="frame" x="132" y="292" width="111" height="27.5"/>
+                                <rect key="frame" x="20" y="292" width="335" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="Wi6-Rk-5nq"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -69,7 +72,9 @@
                         <constraints>
                             <constraint firstItem="Ip5-TK-FvC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="0th-3h-tSe"/>
                             <constraint firstItem="Dqk-Oq-tzl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="3ku-JE-eW2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CYk-0j-So4" secondAttribute="trailing" constant="20" id="4kA-NJ-5kX"/>
                             <constraint firstItem="CYk-0j-So4" firstAttribute="top" secondItem="Lex-2H-4QS" secondAttribute="bottom" constant="20" id="58m-SK-jcd"/>
+                            <constraint firstItem="CYk-0j-So4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="5ve-aZ-bMA"/>
                             <constraint firstItem="CYk-0j-So4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7C0-on-ctL"/>
                             <constraint firstItem="d4c-bM-VHZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="B4x-jF-hbw"/>
                             <constraint firstItem="Ip5-TK-FvC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="DFj-qX-zuY"/>
