@@ -31,6 +31,48 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func SubmitCity(_ sender: UIButton) {
         if  cityTextField.text != ""  {
+            www = "https://api.openweathermap.org/data/2.5/weather?q="
+            www += cityTextField.text?.replacingOccurrences(of: " ", with: "-") ?? "London"   // save two worded inputs
+            www += ",uk&appid=f965d898b4167e6331f06bd6764ea088"
+            
+            let url = URL(string: www)!
+            
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                
+                if error != nil { print(error!) } else {
+                    
+                    if let urlContent = data { // data in JSON format
+                        
+                        do {
+                            // serialize the JSON data, to use it's element in programatic way
+                            let jsonResult = try JSONSerialization.jsonObject(with: urlContent, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
+                            // printing all stuff to get oriented in the result
+                            print(jsonResult)
+                            // dig in a dictionary by key to get string
+                            if let name = jsonResult["name"] as? String {
+                                print(name)
+                            }
+                            // dig in a dictionary by key to get array, dig in by index to get dictionary, dig in by key to get string
+                            if let description = ((jsonResult["weather"] as? NSArray)?[0] as? NSDictionary)?["description"] as? String {
+                                
+                                print(description)  // or update ui element
+                                // DispatchQueue.main.sync(execute: {  self.resultLabel.text = description  } )
+                                
+                            }
+                            
+                            
+                        } catch { print("JSON Processing Failed")        }
+                        
+                    }
+                    
+                    
+                }
+                
+                
+            }
+            
+            task.resume()
+            
             // https://www.weather-forecast.com/locations/London/forecasts/latest
             www = "https://www.weather-forecast.com/locations/"
             www += cityTextField.text?.replacingOccurrences(of: " ", with: "-") ?? "London"   // save two worded inputs
